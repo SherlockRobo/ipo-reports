@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>思格新能源 6656.HK — 打新研究简报</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>@import url("data:text/css,");</style>
+<style>
+:root {
+  --ink: #0d1117;
+  --paper: #f7f5f0;
+  --accent: #c8401a;
+  --accent2: #1a6e3c;
+  --gold: #b8860b;
+  --muted: #6b6560;
+  --border: #ddd8d0;
+  --card: #ffffff;
+  --tag-blue: #e8f0fb;
+  --tag-blue-t: #1a4fa0;
+  --tag-green: #e6f4ec;
+  --tag-green-t: #1a6e3c;
+  --tag-red: #fdecea;
+  --tag-red-t: #c8401a;
+  --tag-amber: #fef9e6;
+  --tag-amber-t: #8a6300;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body {
+  background: var(--paper);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* ── HERO ── */
+.hero {
+  background: var(--ink);
+  color: #fff;
+  padding: 36px 48px 28px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(200,64,26,0.25) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(200,64,26,0.6), transparent);
+}
+.hero-label {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 10px;
+  color: var(--accent);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.hero-title {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.15;
+  margin-bottom: 6px;
+}
+.hero-title em {
+  font-style: italic;
+  color: rgba(255,255,255,0.55);
+}
+.hero-sub {
+  font-size: 12px;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: .04em;
+  margin-bottom: 20px;
+}
+.verdict-strip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.verdict-main {
+  background: var(--accent);
+  color: #fff;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  padding: 6px 16px;
+  border-radius: 2px;
+}
+.verdict-note {
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+}
+.hero-meta {
+  position: absolute;
+  top: 36px; right: 48px;
+  text-align: right;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 10px;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.9;
+}
+.hero-price {
+  font-size: 22px;
+  font-weight: 600;
+  color: #fff;
+  display: block;
+  margin-bottom: 2px;
+}
+
+/* ── KPI STRIP ── */
+.kpi-strip {
+  display: grid;
+  grid-template-columns: repeat(6,1fr);
+  border-bottom: 1px solid var(--border);
+  background: var(--card);
+}
+.kpi {
+  padding: 14px 18px;
+  border-right: 1px solid var(--border);
+}
+.kpi:last-child { border-right: none; }
+.kpi.hl { background: #fef9e6; }
+.kpi-l { font-size: 9.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 4px; }
+.kpi-v { font-family: Georgia, 'Times New Roman', serif; font-size: 22px; line-height: 1; margin-bottom: 2px; }
+.kpi-v.pos { color: var(--accent2); }
+.kpi-v.neg { color: var(--accent); }
+.kpi-v.neu { color: var(--tag-blue-t); }
+.kpi-s { font-size: 10px; color: var(--muted); }
+
+/* ── PAGE ── */
+.page { max-width: 1040px; margin: 0 auto; background: var(--card); border: 1px solid var(--border); }
+
+/* ── SECTIONS ── */
+.section { padding: 24px 32px; border-bottom: 1px solid var(--border); }
+.section:last-child { border-bottom: none; }
+.sec-hd {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.sec-num {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 9px;
+  color: var(--accent);
+  letter-spacing: .1em;
+  background: var(--tag-red);
+  padding: 2px 7px;
+  border-radius: 2px;
+}
+.sec-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+
+/* ── GRID ── */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.col-60-40 { display: grid; grid-template-columns: 60% 40%; gap: 20px; }
+.col-40-60 { display: grid; grid-template-columns: 40% 60%; gap: 20px; }
+
+/* ── VERDICT BOX ── */
+.verdict-box {
+  background: var(--ink);
+  color: #fff;
+  border-radius: 4px;
+  padding: 20px 22px;
+  margin-bottom: 16px;
+}
+.vb-title {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+.vb-title span { color: var(--accent); font-style: italic; }
+.vb-body { font-size: 12px; color: rgba(255,255,255,0.65); line-height: 1.7; }
+
+/* ── TAGS ── */
+.tag { display: inline-block; padding: 2px 8px; border-radius: 2px; font-size: 10px; font-weight: 600; margin: 2px; }
+.tag.blue { background: var(--tag-blue); color: var(--tag-blue-t); }
+.tag.green { background: var(--tag-green); color: var(--tag-green-t); }
+.tag.red { background: var(--tag-red); color: var(--tag-red-t); }
+.tag.amber { background: var(--tag-amber); color: var(--tag-amber-t); }
+
+/* ── TABLES ── */
+.dt { width: 100%; border-collapse: collapse; font-size: 12px; font-variant-numeric: tabular-nums; }
+.dt th {
+  background: #f5f3ef;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  text-align: right;
+  white-space: nowrap;
+}
+.dt th:first-child { text-align: left; }
+.dt td { padding: 8px 12px; border: 1px solid #eee; text-align: right; }
+.dt td:first-child { text-align: left; font-weight: 500; }
+.dt tr.hl td { background: #fef9e6; }
+.dt tr.bold td { background: #f5f3ef; font-weight: 600; }
+.dt tr:hover td { background: #faf8f5; }
+.pos { color: var(--accent2); font-weight: 600; }
+.neg { color: var(--accent); font-weight: 600; }
+.neu { color: var(--tag-blue-t); font-weight: 600; }
+.dim { color: #bbb; font-weight: 400; }
+
+/* ── BULLET LIST ── */
+.blist { list-style: none; }
+.blist li {
+  padding: 5px 0 5px 18px;
+  position: relative;
+  font-size: 12px;
+  color: #333;
+  line-height: 1.55;
+  border-bottom: 1px solid #f5f3ef;
+}
+.blist li:last-child { border-bottom: none; }
+.blist li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* ── SCORE CARD ── */
+.score-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.score-card {
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 12px 14px;
+}
+.score-card.hl { border-color: var(--accent2); background: #f1faf5; }
+.score-label { font-size: 10px; color: var(--muted); margin-bottom: 6px; }
+.score-bar-t { height: 4px; background: #ede9e3; border-radius: 2px; overflow: hidden; margin-bottom: 5px; }
+.score-bar-f { height: 100%; border-radius: 2px; }
+.score-val { font-family: Georgia, 'Times New Roman', serif; font-size: 20px; }
+.score-desc { font-size: 10px; color: var(--muted); margin-top: 2px; line-height: 1.4; }
+
+/* ── MODULE BOXES ── */
+.module-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 8px; margin-bottom: 10px; }
+.module-box {
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 10px 8px;
+  text-align: center;
+}
+.module-icon { font-size: 18px; margin-bottom: 4px; }
+.module-name { font-size: 10px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+.module-desc { font-size: 9px; color: var(--muted); line-height: 1.4; }
+
+/* ── CORNERSTONE ── */
+.cs-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
+.cs-card {
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 10px 12px;
+}
+.cs-card.top { border-color: var(--gold); background: #fffdf5; }
+.cs-name { font-size: 11px; font-weight: 600; color: var(--ink); margin-bottom: 2px; line-height: 1.3; }
+.cs-type { font-size: 9.5px; color: var(--muted); margin-bottom: 5px; }
+.cs-amt { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; font-size: 13px; font-weight: 600; color: var(--ink); }
+.cs-pct { font-size: 9px; color: var(--muted); }
+
+/* ── CHART CONTAINERS ── */
+.chart-wrap { position: relative; }
+
+/* ── RISK BADGES ── */
+.risk { display: inline-block; padding: 2px 7px; border-radius: 2px; font-size: 10px; font-weight: 700; margin-right: 4px; }
+.risk.h { background: #fdecea; color: var(--accent); }
+.risk.m { background: #fef9e6; color: var(--gold); }
+.risk.l { background: var(--tag-green); color: var(--accent2); }
+
+/* ── DISCLAIMER ── */
+.disclaimer {
+  background: #f5f3ef;
+  padding: 14px 32px;
+  border-top: 1px solid var(--border);
+  font-size: 10px;
+  color: #999;
+  line-height: 1.6;
+}
+
+/* ── IPO TIMELINE ── */
+.timeline { display: flex; align-items: flex-start; gap: 0; margin: 10px 0; }
+.tl-item { flex: 1; text-align: center; position: relative; }
+.tl-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 8px; left: 50%;
+  width: 100%; height: 1px;
+  background: var(--border);
+  z-index: 0;
+}
+.tl-dot {
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--paper);
+  box-shadow: 0 0 0 1px var(--accent);
+  margin: 0 auto 6px;
+  position: relative;
+  z-index: 1;
+}
+.tl-dot.done { background: var(--accent2); box-shadow: 0 0 0 1px var(--accent2); }
+.tl-date { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; font-size: 9px; color: var(--muted); }
+.tl-label { font-size: 9.5px; color: var(--ink); font-weight: 500; margin-top: 2px; }
+
+/* ── MOAT TABLE ── */
+.moat-row { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; border-bottom: 1px solid #f5f3ef; }
+.moat-row:last-child { border-bottom: none; }
+.moat-icon { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; margin-top: 2px; }
+.moat-title { font-size: 12px; font-weight: 600; margin-bottom: 2px; }
+.moat-desc { font-size: 11px; color: var(--muted); line-height: 1.5; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-meta">
+    发行价<br>
+    <span class="hero-price">HKD 324.20</span>
+    上市日期 2026-04-16<br>
+    市值约 HKD 800亿<br>
+    数据截至 2026-04-08
+  </div>
+  <div class="hero-label">港股打新研究简报 · IPO Report</div>
+  <div class="hero-title">思格新能源（上海）股份有限公司<br><em>Sigenergy Technology Co., Ltd.</em></div>
+  <div class="hero-sub">股份代号 6656.HK · 港交所主板 · 清洁能源储能 · 保荐人：中信里昂 / 法巴</div>
+  <div class="verdict-strip">
+    <div class="verdict-main">✦ 打新结论：积极申购</div>
+    <div class="verdict-note">博暗盘溢价 · 首日视情况决定持有或离场 · 中长线等待上市后3-6个月数据验证</div>
+  </div>
+</div>
+
+<!-- ── KPI STRIP ── -->
+<div class="kpi-strip">
+  <div class="kpi hl">
+    <div class="kpi-l">打新评级</div>
+    <div class="kpi-v neg">积极</div>
+    <div class="kpi-s">基石50%覆盖，GIC领投</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-l">发行价 PE</div>
+    <div class="kpi-v neu">~25x</div>
+    <div class="kpi-s">对应2025A净利29亿RMB</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-l">2025A 毛利率</div>
+    <div class="kpi-v pos">50.1%</div>
+    <div class="kpi-s">2023A仅31.3%，持续扩张</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-l">2025A 营收增速</div>
+    <div class="kpi-v pos">+577%</div>
+    <div class="kpi-s">9.0亿RMB（2024A 1.3亿）</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-l">基石认购</div>
+    <div class="kpi-v neu">HKD 280亿</div>
+    <div class="kpi-s">占全球发售49.8%，18家</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-l">公开发售股份</div>
+    <div class="kpi-v neg">仅135.7万股</div>
+    <div class="kpi-s">中签率预计极低</div>
+  </div>
+</div>
+
+<!-- ── SECTION 1: 打新建议 ── -->
+<div class="section">
+  <div class="sec-hd"><span class="sec-num">01</span><span class="sec-title">打新建议与核心逻辑</span></div>
+  <div class="col-40-60">
+    <div>
+      <div class="verdict-box">
+        <div class="vb-title">积极申购<span>·</span>最小手博中签</div>
+        <div class="vb-body">
+          基石阵容顶级（GIC领投HKD 33亿）、发行量极小（仅135.7万股公开发售）、增速和毛利率在港股新股中罕见，打新逻辑主要博<strong style="color:#fff">超额认购 → 暗盘溢价 → 首日弹升</strong>。
+          <br><br>
+          建议策略：申请最小手（100股，约HKD 32,747），中签率虽低，但预期回报风险比合理。首日视暗盘/开盘溢价情况，超过30%则考虑减仓。中长线持仓需等上市后1-2个季度确认增速不崩。
+        </div>
+      </div>
+    </div>
+    <div>
+      <!-- IPO Timeline -->
+      <div style="margin-bottom:14px">
+        <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px">申购时间表</div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot done"></div>
+            <div class="tl-date">4月8日</div>
+            <div class="tl-label">招股开始</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-date">4月13日</div>
+            <div class="tl-label">截止申购</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-date">4月15日</div>
+            <div class="tl-label">公布结果</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-date">4月16日</div>
+            <div class="tl-label">上市首日</div>
+          </div>
+        </div>
+      </div>
+      <table class="dt">
+        <tr><th style="text-align:left">申购股数</th><th>应付金额（HKD）</th></tr>
+        <tr class="hl"><td><strong>100股（1手）</strong></td><td><strong>32,747</strong></td></tr>
+        <tr><td>200股</td><td>65,494</td></tr>
+        <tr><td>500股</td><td>163,735</td></tr>
+        <tr><td>1,000股</td><td>327,470</td></tr>
+      </table>
+      <div style="font-size:10px;color:var(--muted);margin-top:6px">含1%经纪佣金及交易费用 · 每手100股 · 上限678,700股</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SECTION 2: 公司基本面 ── -->
+<div class="section">
+  <div class="sec-hd"><span class="sec-num">02</span><span class="sec-title">公司基本面</span></div>
+  <div class="two-col" style="margin-bottom:16px">
+    <div>
+      <div style="font-size:11px;font-weight:600;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em">公司概况</div>
+      <ul class="blist">
+        <li><strong>成立时间：</strong>2022年5月，不到4年即赴港IPO，创储能赛道最快IPO纪录</li>
+        <li><strong>创始人：</strong>许映童，前华为光伏业务总裁（带领华为2015年全球逆变器出货量第一）+前华为昇腾计算总裁，23年华为经历</li>
+        <li><strong>核心产品：</strong>SigenStor五合一AI光储充一体机，占收入92.9%</li>
+        <li><strong>市场定位：</strong>全球可堆叠分布式储能一体机市场份额第一（28.6%），主战场欧洲+澳大利亚</li>
+        <li><strong>渠道：</strong>85个国家，172家分销商，17,600+安装商（ToB经销商模式）</li>
+        <li><strong>融资历史：</strong>2022年6月至2024年1月共完成6轮融资，估值从1亿飙升至43亿RMB（+43倍），高瓴/华登/钟鼎等顶级机构参与</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-size:11px;font-weight:600;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em">股权结构</div>
+      <table class="dt" style="margin-bottom:12px">
+        <tr><th style="text-align:left">股东</th><th>持股比例</th><th>角色</th></tr>
+        <tr class="hl"><td>许映童（创始人）</td><td class="neu">~49.28%</td><td>控股股东</td></tr>
+        <tr><td>张先淼（联创）</td><td>~11.13%</td><td>执行董事</td></tr>
+        <tr><td>高瓴创投（珠海玫恒）</td><td>~14.89%</td><td>最大外部股东</td></tr>
+        <tr><td>华登国际</td><td>~8.18%</td><td>策略股东</td></tr>
+        <tr><td>钟鼎/云晖资本</td><td>各~2.88%</td><td>财务投资人</td></tr>
+        <tr><td>员工持股平台</td><td>>14%</td><td>管理层激励</td></tr>
+      </table>
+      <div style="font-size:10px;color:var(--muted);padding:8px;background:#f5f3ef;border-radius:2px">
+        ⚠ 股份支付费用累计近5亿RMB，导致历史亏损放大；许映童持股曾通过岳母代持，与华为竞业协议有关。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SECTION 3: 业务模式 ── -->
+<div class="section">
+  <div class="sec-hd"><span class="sec-num">03</span><span class="sec-title">业务模式 · SigenStor五合一系统</span></div>
+
+  <div style="font-size:11px;color:var(--muted);margin-bottom:12px">核心逻辑：传统方案需分购5个设备，思格集成为一台可堆叠机器，通过AI云端优化实现电费套利</div>
+
+  <div class="module-grid">
+    <div class="module-box">
+      <div class="module-icon">☀️</div>
+      <div class="module-name">光伏逆变器</div>
+      <div class="module-desc">DC→AC电力转换</div>
+    </div>
+    <div class="module-box">
+      <div class="module-icon">⚡</div>
+      <div class="module-name">PCS变流器</div>
+      <div class="module-desc">电池充放电控制</div>
+    </div>
+    <div class="module-box" style="border-color:var(--accent2);background:#f1faf5">
+      <div class="module-icon">🔋</div>
+      <div class="module-name">储能电池组</div>
+      <div class="module-desc">磷酸铁锂·可堆叠扩容</div>
+    </div>
+    <div class="module-box">
+      <div class="module-icon">🚗</div>
+      <div class="module-name">DC快充模块</div>
+      <div class="module-desc">EV直流充电</div>
+    </div>
+    <div class="module-box" style="border-color:var(--tag-blue-t);background:var(--tag-blue)">
+      <div class="module-icon">🤖</div>
+      <div class="module-name">EMS + AI</div>
+      <div class="module-desc">动态电价优化·VPP接入</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px">竞争壁垒评估</div>
+      <div class="moat-row">
+        <div class="moat-icon" style="background:var(--tag-green)">⚙️</div>
+        <div><div class="moat-title">集成工程难度</div><div class="moat-desc">0毫秒离并网切换需硬件+固件协同，新进入者约需1-2年调试，但可被复制。<span class="tag amber">中壁垒</span></div></div>
+      </div>
+      <div class="moat-row">
+        <div class="moat-icon" style="background:var(--tag-blue)">🌐</div>
+        <div><div class="moat-title">渠道网络</div><div class="moat-desc">欧洲/澳大利亚17,600家认证安装商，换品牌需重新培训，有一定黏性。<span class="tag green">较强壁垒</span></div></div>
+      </div>
+      <div class="moat-row">
+        <div class="moat-icon" style="background:var(--tag-amber)">🤖</div>
+        <div><div class="moat-title">AI能源优化</div><div class="moat-desc">瑞典用户电费降低约70%，真实ROI驱动购买，但竞争对手均在布局类似平台。<span class="tag amber">差异化但可追赶</span></div></div>
+      </div>
+      <div class="moat-row">
+        <div class="moat-icon" style="background:var(--tag-red)">⚠️</div>
+        <div><div class="moat-title">核心风险</div><div class="moat-desc">Tesla Powerwall 3已在美国以集成方案抢份额，阳光电源/华为均在布局一体化，集成本身不构成长期护城河。<span class="tag red">低壁垒</span></div></div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px">收入地理分布（2025A）</div>
+      <div class="chart-wrap" style="height:200px">
+        <canvas id="geoChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SECTION 4: 财务数据 ── -->
+<div class="section">
+  <div class="sec-hd"><span class="sec-num">04</span><span class="sec-title">财务数据</span></div>
+
+  <table class="dt" style="margin-bottom:16px">
+    <thead>
+      <tr>
+        <th style="text-align:left">指标（万元RMB）</th>
+        <th>2023A</th><th>2024A</th><th>2025A</th>
+        <th>YoY（24→25）</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>营收</td><td>5,830</td><td>132,984</td><td>900,051</td><td class="pos">+577%</td></tr>
+      <tr><td>销售成本</td><td>(40,053)</td><td>(70,621)</td><td>(449,566)</td><td class="neg">+537%</td></tr>
+      <tr class="hl"><td><strong>毛利</strong></td><td>18,249</td><td>62,363</td><td><strong>450,485</strong></td><td class="pos"><strong>+622%</strong></td></tr>
+      <tr class="hl"><td><strong>毛利率</strong></td><td>31.3%</td><td>46.9%</td><td class="pos"><strong>50.1%</strong></td><td class="pos">+3.2pp</td></tr>
+      <tr><td>销售及分销费用</td><td>(53,422)</td><td>(16,874)</td><td>(44,264)</td><td>—</td></tr>
+      <tr><td>行政费用</td><td>(149,628)</td><td>(7,805)</td><td>(34,481)</td><td>—</td></tr>
+      <tr><td>研发费用</td><td>(193,005)</td><td>(28,025)</td><td>(49,403)</td><td class="pos">+76%</td></tr>
+      <tr><td>股份支付费用</td><td>(123,954)</td><td>(59,712)</td><td>(290,171)</td><td>—</td></tr>
+      <tr class="hl"><td><strong>净利润</strong></td><td class="neg">(373,452)</td><td>8,385</td><td class="pos"><strong>291,883</strong></td><td class="pos"><strong>+3,381%</strong></td></tr>
+      <tr><td>净利率</td><td class="neg">亏损</td><td>6.3%</td><td class="pos">32.4%</td><td class="pos">+26.1pp</td></tr>
+      <tr class="hl"><td><strong>调整后净利润</strong></td><td class="neg">(249,498)</td><td>150,205</td><td class="pos"><strong>323,493</strong></td><td class="pos"><strong>+115%</strong></td></tr>
+      <tr><td>调整后净利率</td><td>—</td><td>11.3%</td><td class="pos">35.9%</td><td>—</td></tr>
+    </tbody>
+  </table>
+
+  <div class="two-col">
+    <div>
+      <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px">营收与毛利率趋势</div>
+      <div class="chart-wrap" style="height:200px">
+        <canvas id="revChart"></canvas>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px">产品线毛利率对比</div>
+      <div class="chart-wrap" style="height:200px">
+        <canvas id="gpChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="three-col" style="margin-top:16px">
+    <div style="background:#f5f3ef;border-radius:3px;padding:12px 14px">
+      <div style="font-size:10px;color:var(--muted);margin-bottom:4px">2025A 净利润跳升原因</div>
+      <div style="font-size:11px;color:var(--ink);line-height:1.6">营收+577%，三费仅+143%。<strong>经营杠杆爆发</strong>——毛利+39亿，三费总增仅+7.5亿，利润直接落底线。</div>
+    </div>
+    <div style="background:#f5f3ef;border-radius:3px;padding:12px 14px">
+      <div style="font-size:10px;color:var(--muted);margin-bottom:4px">均价下行 ≠ 毛利率下行</div>
+      <div style="font-size:11px;color:var(--ink);line-height:1.6">SigenStor均价3.17→2.12元/Wh（-33%），但毛利率32%→51%（+19pp）。出货量219倍增长，<strong>规模效应驱动成本压缩更快</strong>。</div>
+    </div>
+    <div style="background:#f5f3ef;border-radius:3px;padding:12px 14px">
+      <div style="font-size:10px;color:var(--muted);margin-bottom:4px">2026年1-2月最新数据</div>
+      <div style="font-size:11px;color:var(--ink);line-height:1.6">SigenStor出货0.58GWh（vs去年同期0.14GWh，<strong class="pos">+314%</strong>），应收账款增速+520%，增速仍在加速。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SECTION 5: 估值对比 ── -->
+<div class="section">
+  <div class="sec-hd"><span class="sec-num">05</span><span class="sec-title">估值分析与同业对比</span></div>
+
+  <table class="dt" style="margin-bottom:14px">
+    <thead>
+      <tr>
+        <th style="text-align:left">公司</th>
+        <th>市场</th><th>市值</th><th>PE(TTM)</th>
+        <th>毛利率</th><th>营收增速</th><th>壁垒</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="hl">
+        <td><strong>思格新能源 6656.HK（IPO价）</strong></td>
+        <td>港股</td><td>~730亿RMB</td>
+        <td class="neu"><strong>~25x</strong></td>
+        <td class="pos">50.1%</td>
+        <td class="pos">+577%</td>
+        <td><span class="tag amber">集成+AI</span></td>
+      </tr>
+      <tr>
+        <td>阳光电源 300274</td>
+        <td>A股</td><td>~2,500亿</td>
+        <td>~27x</td>
+        <td>~35%</td>
+        <td>+20%+</td>
+        <td><span class="tag green">储能龙头</span></td>
+      </tr>
+      <tr>
+        <td>德业股份 605117</td>
+        <td>A股</td><td>~510亿</td>
+        <td>~17x</td>
+        <td>~35%</td>
+        <td>中高增</td>
+        <td><span class="tag blue">新兴市场</span></td>
+      </tr>
+      <tr>
+        <td>固德威 688390</td>
+        <td>A股</td><td>~220亿</td>
+        <td>~22x</td>
+        <td>~30%</td>
+        <td>中速</td>
+        <td><span class="tag blue">户用逆变</span></td>
+      </tr>
+      <tr>
+        <td>Enphase ENPH</td>
+        <td>美股</td><td>~44亿USD</td>
+        <td>~28x</td>
+        <td>~45%</td>
+        <td class="neg">下行</td>
+        <td><span class="tag blue">微逆生态</span></td>
+      </tr>
+      <tr>
+        <td>SolarEdge SEDG</td>
+        <td>美股</td><td>~27亿USD</td>
+        <td class="neg">亏损</td>
+        <td class="neg">压缩中</td>
+        <td class="neg">负增长</td>
+        <td><span class="tag red">承压</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="background:#fef9e6;border-left:3px solid var(--gold);padding:12px 16px;border-radius:0 3px 3px 0;font-size:11px;line-height:1.7">
+    <strong>估值结论：</strong>发行价对应约25x PE，与阳光电源（27x）基本相当，但增速（577% vs 20%+）和毛利率（50% vs 35%）均大幅领先，绝对数字看起来合理。<br>
+    <strong>关键隐忧：</strong>①高增速必然回落，2026E预计降至50-100%区间，市场将重新定价；②上市募资约38亿RMB注入，权益扩大，ROE从134%回落至30-50%区间；③单产品（SigenStor占92.9%收入）、单渠道、几乎100%依赖海外，任何一个环节的冲击都是系统性风险。
+  </div>
+</div>
+
+<!-- ── SECTION 6: 基石投资者 ── -->
+<div class="section">
+  <div class="sec-hd"><span class="sec-num">06</span><span class="sec-title">基石投资者 · 合计HKD 279.89亿 · 占全球发售49.8%</span></div>
+
+  <div class="cs-grid" style="margin-bottom:12px">
+    <div class="cs-card top">
+      <div class="cs-name">Aranda Investments</div>
+      <div class="cs-type">新加坡主权基金GIC旗下</div>
+      <div class="cs-amt">HKD 33亿</div>
+      <div class="cs-pct">占发售 5.87% · 最大基石</div>
+    </div>
+    <div class="cs-card top">
+      <div class="cs-name">中国国有保险系机构</div>
+      <div class="cs-type">国寿/太保系（招股书部分编码）</div>
+      <div class="cs-amt">HKD 28.89亿</div>
+      <div class="cs-pct">占发售 5.14%</div>
+    </div>
+    <div class="cs-card top">
+      <div class="cs-name">高瓴集团（Hillhouse）</div>
+      <div class="cs-type">HHLR + Hillhouse IM 合计</div>
+      <div class="cs-amt">HKD 21亿</div>
+      <div class="cs-pct">占发售 3.74% · 原始股东追投</div>
+    </div>
+    <div class="cs-card top">
+      <div class="cs-name">UBS Asset Management</div>
+      <div class="cs-type">瑞银资产管理新加坡</div>
+      <div class="cs-amt">HKD 21亿</div>
+      <div class="cs-pct">占发售 3.74%</div>
+    </div>
+    <div class="cs-card">
+      <div class="cs-name">AXA Investment Managers</div>
+      <div class="cs-type">法国安盛资产（英国）</div>
+      <div class="cs-amt">HKD 15亿</div>
+      <div class="cs-pct">占发售 2.67%</div>
+    </div>
+    <div class="cs-card">
+      <div class="cs-name">CPE Energy</div>
+      <div class="cs-type">中信产业基金清洁能源基金</div>
+      <div class="cs-amt">HKD 15亿</div>
+      <div class="cs-pct">占发售 2.67%</div>
+    </div>
+    <div class="cs-card">
+      <div class="cs-name">Lazurite Hime / ORIX Asia</div>
+      <div class="cs-type">大和房屋旗下ORIX管理</div>
+      <div class="cs-amt">HKD 15亿</div>
+      <div class="cs-pct">占发售 2.67%</div>
+    </div>
+    <div class="cs-card">
+      <div class="cs-name">Barings（MassMutual旗下）</div>
+      <div class="cs-type">管理规模4,810亿美元以上</div>
+      <div class="cs-amt">HKD 10亿</div>
+      <div class="cs-pct">占发售 1.78%</div>
+    </div>
+    <div class="cs-card">
+      <div class="cs-name">Boyu Capital（博裕资本）</div>
+      <div class="cs-type">顶级中国PE机构</div>
+      <div class="cs-amt">HKD 10亿</div>
+      <div class="cs-pct">占发售 1.78%</div>
+    </div>
+    <div class="cs-card">
+      <div class="cs-name">Scene Cloud / Orchid Asia</div>
+      <div class="cs-type">专注亚洲成长期投资</div>
+      <div class="cs-amt">HKD 10亿</div>
+      <div class="cs-pct">占发售 1.78%</div>
+    </div>
+    <div class="cs-card">
+      <div class="cs-name">华登国际 Huadeng</div>
+      <div class="cs-type">原始A轮股东，二次追投</div>
+      <div class="cs-amt">HKD 10亿</div>
+      <div class="cs-pct">占发售 1.78% · 内部人信号</div>
+    </div>
+    <div class="cs-card">
+      <div class="cs-name">Perseverance AM Singapore</div>
+      <div class="cs-type">持有2259/3750/6669.HK等</div>
+      <div class="cs-amt">HKD 10亿</div>
+      <div class="cs-pct">占发售 1.78%</div>
+    </div>
+  </div>
+
+  <div style="background:#f5f3ef;border-radius:3px;padding:10px 14px;font-size:11px;color:var(--muted);line-height:1.7">
+    🔑 <strong style="color:var(--ink)">基石解读：</strong>GIC（Aranda）领投33亿港元代表最高级别主权基金背书。华登国际（原A轮股东）以IPO价追加基石认购，原始VC在二级价格主动买入，是强烈的内部信心信号。基石合计覆盖49.8%发售量，公开发售仅剩约678万股，预计认购倍数极高，中签率将极低。
+    基石锁定期6个月（至2026年10月），届时解锁压力需关注。
+  </div>
+</div>
+
+<!-- ── SECTION 7: 发行券商 ── -->
+<div class="section">
+  <div class="sec-hd"><span class="sec-num">07</span><span class="sec-title">发行券商</span></div>
+  <div class="two-col">
+    <div>
+      <table class="dt">
+        <tr><th style="text-align:left">角色</th><th style="text-align:left">机构</th></tr>
+        <tr class="hl"><td><strong>联席保荐人 / 整体协调人（主导）</strong></td><td><strong>中信里昂证券（CLSA）</strong></td></tr>
+        <tr><td>联席保荐人 / 整体协调人</td><td>法国巴黎证券（BNP Paribas）</td></tr>
+        <tr><td>稳定价格操作人</td><td>中信里昂证券</td></tr>
+        <tr><td>AXA IM 关联机构</td><td>BNPP Asset Management（基石兼承销）</td></tr>
+      </table>
+    </div>
+    <div style="font-size:11px;color:var(--muted);line-height:1.8;padding:10px 0">
+      <div style="margin-bottom:8px;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">值得注意</div>
+      <ul class="blist">
+        <li>这是思格新能源<strong>第三次递表</strong>（2025年2月、9月均因未能完成聆讯而失效），上市迫切性部分来自投资者有赎回触发条款压力</li>
+        <li>BNP Paribas既是保荐人，其资产管理子公司BNPP AM又是基石投资者（AXA IM旗下），存在利益关联，但属港交所允许范围</li>
+        <li>BNPP AM作为基石投资者，承诺不将认购股份出售给BNP Paribas关联方，合规处理已明确</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ── SECTION 8: 主要风险 ── -->
+<div class="section">
+  <div class="sec-hd"><span class="sec-num">08</span><span class="sec-title">主要风险提示</span></div>
+  <div class="two-col">
+    <div>
+      <ul class="blist">
+        <li><span class="risk h">高</span><strong>单产品集中风险：</strong>SigenStor占收入92.9%、毛利贡献94%+，产品迭代、竞争降价或主市场政策变化均构成系统性冲击</li>
+        <li><span class="risk h">高</span><strong>海外依赖风险：</strong>境外收入占99%，境内不足1%；关税政策、地缘政治（欧美贸易摩擦）、汇率波动均直接影响业绩</li>
+        <li><span class="risk h">高</span><strong>竞争加剧：</strong>Tesla Powerwall 3已在美国市场以集成方案快速抢份额（2024年美国市占率从3%升至10%）；阳光电源/华为/固德威均在布局一体化产品</li>
+      </ul>
+    </div>
+    <div>
+      <ul class="blist">
+        <li><span class="risk m">中</span><strong>增速回落预期：</strong>577%增速建立在极低基数上，2026E预计降至50-100%区间，估值需重新定价</li>
+        <li><span class="risk m">中</span><strong>经销商渠道风险：</strong>ToB经销商模式存在渠道库存风险，应收账款集中（前五大客户占收入45%+），若主要经销商出现问题影响较大</li>
+        <li><span class="risk l">低</span><strong>股份支付稀释：</strong>累计股份支付费用近5亿RMB，员工持股平台超14%，上市后存在一定解锁压力</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ── SECTION 9: 后续观察点 ── -->
+<div class="section">
+  <div class="sec-hd"><span class="sec-num">09</span><span class="sec-title">投资结论与后续观察点</span></div>
+  <div class="col-40-60">
+    <div class="score-grid">
+      <div class="score-card hl">
+        <div class="score-label">基本面质量</div>
+        <div class="score-bar-t"><div class="score-bar-f" style="width:85%;background:var(--accent2)"></div></div>
+        <div class="score-val" style="color:var(--accent2)">8.5<span style="font-size:11px;color:var(--muted)">/10</span></div>
+        <div class="score-desc">毛利率+增速在港股新股中罕见</div>
+      </div>
+      <div class="score-card">
+        <div class="score-label">估值合理性</div>
+        <div class="score-bar-t"><div class="score-bar-f" style="width:60%;background:var(--gold)"></div></div>
+        <div class="score-val" style="color:var(--gold)">6<span style="font-size:11px;color:var(--muted)">/10</span></div>
+        <div class="score-desc">25x PE合理但已Price in高预期</div>
+      </div>
+      <div class="score-card hl">
+        <div class="score-label">基石阵容</div>
+        <div class="score-bar-t"><div class="score-bar-f" style="width:90%;background:var(--accent2)"></div></div>
+        <div class="score-val" style="color:var(--accent2)">9<span style="font-size:11px;color:var(--muted)">/10</span></div>
+        <div class="score-desc">GIC领投+高瓴追投，顶级背书</div>
+      </div>
+      <div class="score-card">
+        <div class="score-label">护城河深度</div>
+        <div class="score-bar-t"><div class="score-bar-f" style="width:45%;background:var(--accent)"></div></div>
+        <div class="score-val" style="color:var(--accent)">4.5<span style="font-size:11px;color:var(--muted)">/10</span></div>
+        <div class="score-desc">集成可被复制，渠道是主要壁垒</div>
+      </div>
+      <div class="score-card">
+        <div class="score-label">打新赔率</div>
+        <div class="score-bar-t"><div class="score-bar-f" style="width:80%;background:var(--tag-blue-t)"></div></div>
+        <div class="score-val" style="color:var(--tag-blue-t)">8<span style="font-size:11px;color:var(--muted)">/10</span></div>
+        <div class="score-desc">发行量极小，超额认购确定性高</div>
+      </div>
+      <div class="score-card">
+        <div class="score-label">中长线持仓</div>
+        <div class="score-bar-t"><div class="score-bar-f" style="width:50%;background:var(--gold)"></div></div>
+        <div class="score-val" style="color:var(--gold)">5<span style="font-size:11px;color:var(--muted)">/10</span></div>
+        <div class="score-desc">需等上市后数据验证再决定</div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px">后续关键观察点</div>
+      <ul class="blist">
+        <li>📊 <strong>认购倍数（4月15日）：</strong>超过100倍则暗盘溢价有望达20-40%+，超过200倍则首日目标价HKD 400-450</li>
+        <li>📈 <strong>上市后1季度增速：</strong>2026年Q1出货量是否维持300%+增速，是中长线持仓核心验证点</li>
+        <li>💰 <strong>毛利率稳定性：</strong>能否在规模扩张中守住50%毛利率底线，或继续扩张至55%+</li>
+        <li>🌍 <strong>北美市场突破：</strong>欧洲/澳大利亚已占收入90%+，进入北美将是下一波估值重估催化剂</li>
+        <li>🔒 <strong>基石解锁（6个月后）：</strong>2026年10月约280亿港元基石锁定期届满，关注届时卖压</li>
+        <li>⚔️ <strong>Tesla Powerwall 3竞争：</strong>若特斯拉开始进入欧洲/澳大利亚市场，将直接冲击思格核心市场</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ── DISCLAIMER ── -->
+<div class="disclaimer">
+  免责声明：本简报基于思格新能源招股章程（2026年4月8日）、港交所披露资料及公开市场信息，仅供参考，不构成投资建议。打新申购涉及风险，认购不保证获分配。过往业绩不代表未来回报。估值分析及财务数据均为基于公开招股书信息的独立计算，可能与最终年报数据存在差异。数据截至2026年4月8日。
+</div>
+
+</div>
+
+<script>
+// ── GEO DONUT ──
+new Chart(document.getElementById('geoChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['亚太（除内地）', '欧洲', '中东欧及其他', '中国内地', '其他'],
+    datasets: [{
+      data: [45.9, 44.6, 6.2, 1.0, 2.3],
+      backgroundColor: ['#1a4fa0','#1a6e3c','#8a6300','#c8401a','#999'],
+      borderWidth: 2,
+      borderColor: '#fff'
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    cutout: '60%',
+    plugins: {
+      legend: {
+        position: 'right',
+        labels: { font: { size: 10, family: 'DM Sans' }, boxWidth: 10, padding: 8, color: '#555' }
+      },
+      tooltip: { callbacks: { label: ctx => ctx.label + ': ' + ctx.parsed + '%' } }
+    }
+  }
+});
+
+// ── REV + GP MARGIN ──
+new Chart(document.getElementById('revChart'), {
+  type: 'bar',
+  data: {
+    labels: ['2023A', '2024A', '2025A'],
+    datasets: [
+      {
+        label: '营收（亿RMB）',
+        data: [0.58, 13.3, 90.0],
+        backgroundColor: ['#ddd', '#aac4e8', '#1a4fa0'],
+        borderRadius: 3,
+        yAxisID: 'y'
+      },
+      {
+        label: '毛利率',
+        type: 'line',
+        data: [31.3, 46.9, 50.1],
+        borderColor: '#c8401a',
+        backgroundColor: 'rgba(200,64,26,0.08)',
+        borderWidth: 2,
+        pointRadius: 5,
+        pointBackgroundColor: '#c8401a',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
+        tension: 0.3,
+        fill: true,
+        yAxisID: 'y2'
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { position: 'top', labels: { font: { size: 10 }, boxWidth: 12, padding: 10, color: '#555' } },
+      tooltip: { backgroundColor: '#fff', titleColor: '#333', bodyColor: '#555', borderColor: '#ddd', borderWidth: 1 }
+    },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { size: 10 }, color: '#888' }, border: { display: false } },
+      y: {
+        position: 'left', grid: { color: '#f0ede8' },
+        ticks: { font: { size: 9 }, color: '#888', callback: v => v + '亿' },
+        border: { display: false }
+      },
+      y2: {
+        position: 'right', grid: { drawOnChartArea: false },
+        min: 0, max: 70,
+        ticks: { font: { size: 9 }, color: '#c8401a', callback: v => v + '%' },
+        border: { display: false }
+      }
+    }
+  }
+});
+
+// ── GP BY PRODUCT ──
+new Chart(document.getElementById('gpChart'), {
+  type: 'bar',
+  data: {
+    labels: ['SigenStor', '能源网关', '其他'],
+    datasets: [
+      { label: '2023A毛利率', data: [32.2, 1.3, 16.8], backgroundColor: '#ddd8d0', borderRadius: 2 },
+      { label: '2024A毛利率', data: [47.0, 35.1, 63.0], backgroundColor: '#aac4e8', borderRadius: 2 },
+      { label: '2025A毛利率', data: [50.8, 30.1, 62.1], backgroundColor: '#1a4fa0', borderRadius: 2 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { position: 'top', labels: { font: { size: 10 }, boxWidth: 10, padding: 8, color: '#555' } },
+      tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + '%' } }
+    },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { size: 10 }, color: '#888' }, border: { display: false } },
+      y: {
+        grid: { color: '#f0ede8' },
+        min: 0, max: 80,
+        ticks: { font: { size: 9 }, color: '#888', callback: v => v + '%' },
+        border: { display: false }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>
